@@ -1,17 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap');
 @import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+$p:rgb(28,145,254);
+$s:rgb(233, 247, 255);
+$pt-intent-primary: blue;
+
 html,
 body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
+
 }
 
-html {
-  font-family: "Inter", sans-serif;
+
+html{
+  font-family: 'Inter', sans-serif;
 }
 
 a {
@@ -20,100 +26,94 @@ a {
 }
 
 * {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter',sans-serif;
   outline: none !important;
 }
-
 h2, h3, h4, h5, h6 {
   margin: 0px;
 }
-
-h3 {
-  font-weight: 600;
+h3{
+  font-weight:600;
 }
-
-.navbar {
-  background-color: #1c91fe !important;
+.navbar{
+  background-color: $p !important;
 }
-
-.h-full {
+.h-full{
   height: 100%;
-}
 
-.w-full {
+}
+.w-full{
   width: 100%;
+
 }
 
-.pad-0 {
+.pad-0{
   padding: 0;
 }
-
-.pad-1 {
+.pad-1{
   padding-left: 16vw;
   padding-right: 16vw;
 }
 
-.pad-tb {
+.pad-tb{
   padding-top: 8vh;
   padding-bottom: 8vh;
 }
-
-.mar-0 {
+.mar-0{
   margin: 0;
 }
-
-.mar-1 {
+.mar-1{
   margin: 10px;
 }
-
-.mar-t {
+.mar-t{
   margin-top: 10px;
 }
-
-.container {
+.container{
   height: calc(100% - 50px);
   overflow-y: scroll;
 }
-
-#__next {
+#__next{
   height: 100%;
   width: 100%;
 }
-
-.center {
+.center{
   justify-items: center;
   align-items: center;
   justify-content: center;
 }
 
-.flex {
+.flex{
   display: flex;
 }
 
-.flex-row {
+
+.flex-row{
   flex-direction: row;
 }
-
-.flex-col {
+.flex-col{
   flex-direction: column;
 }
-
-.bp3-dark {
+.bp3-dark{
   background-color: #182026 !important;
-}
-.bp3-dark .divider {
-  border-color: #F5F8FA;
+  .divider{
+    border-color: #F5F8FA;
+  }
 }
 
-.add-btn {
+.add-btn{
   height: 20px;
   width: 210px;
 }
-
-.langs {
+.langs{
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, 210px);
-  grid-auto-rows: auto;
+  grid-template-columns: repeat(auto-fit,210px);
+  grid-auto-rows:auto;  
   gap: 20px;
-}/*# sourceMappingURL=globals.css.map */
+}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+.navbar {
+  background-color: #1c91fe;
+}
+
+.signup {
+  width: 300px;
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #e9f7ff;
+}
+
+.button {
+  margin-left: 4px;
+  margin-right: 4px;
+  outline: none;
+}
+
+.noOutline {
+  outline: none;
+}
+
+.drop {
+  width: 100px;
+}/*# sourceMappingURL=navbar.module.css.map */

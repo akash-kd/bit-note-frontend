@@ -1,0 +1,32 @@
+@import '../color.scss';
+
+.navbar{
+    background-color: $p;
+}
+
+.signup{
+    width:300px;
+}
+
+.title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: $s;
+}
+
+.button{
+    margin-left: 4px;
+    margin-right: 4px;
+    outline: none;
+
+}
+
+.noOutline{
+    outline: none;
+}
+
+.drop{
+    width: 100px;
+}
+
+

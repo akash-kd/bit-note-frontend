@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    height: calc(100% - 50px);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    font-size: 20pt;
+    width: 100%;
+    font-weight: 900;
+    text-align: center;
+}
+.divider{
+    height:inherit;
+    margin: 10px;
+}
+.input{
+    background-color: transparent;
+}
+.center{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
