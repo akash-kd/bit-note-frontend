@@ -7,6 +7,8 @@ import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
 
+import {AuthCtx} from '../context/authCtx'
+
 // function Content() {
 //   return (
 //     <bp3.ButtonGroup vertical className={styles.drop}>
@@ -39,52 +41,53 @@ import axios from 'axios'
 
 
 class Nav extends React.Component {
-  constructor(props) {
-    super(props)
-    this.Login.bind(this)
-    this.Signup.bind(this)
-    this.Account.bind(this)
-    this.handleName.bind(this)
-    this.handleEmail.bind(this)
-    this.handlePassword.bind(this)
-    this.handleLogin.bind(this)
-    this.handleSignup.bind(this)
-    this.showWarning.bind(this)
-    this.getElements.bind(this)
+	static contextType = AuthCtx
+	constructor(props) {
+	  super(props)
+	  this.Login.bind(this)
+	  this.Signup.bind(this)
+	  this.Account.bind(this)
+	  this.handleName.bind(this)
+	  this.handleEmail.bind(this)
+	  this.handlePassword.bind(this)
+	  this.handleLogin.bind(this)
+	  this.handleSignup.bind(this)
+	  this.showWarning.bind(this)
+	  this.getElements.bind(this)
 
-    this.state = {
-      warn: '',
-      user: {},
-    }
-  }
+	  this.state = {
+	    warn: '',
+	    user: {},
+	  }
+	}
 
-  componentDidMount() {
+	componentDidMount() {
 	  const email = localStorage.getItem('email')
-
+	    console.log('CONTEXT',this.context)
 	  if (email) {
 	    this.setState({isLoggedIn: true})
-      axios.post('http://localhost:3030/user/getuser',{email:email})
-        .then(
-          res => {
-            this.setState({
-              user: res.data,
-            })
-          })
-        .catch(
-          err =>{
-            console.log(err)
-          }
-        )
+	    axios.post('http://localhost:3030/user/getuser',{email:email})
+	      .then(
+	        res => {
+	          this.setState({
+	            user: res.data,
+	          })
+	        })
+	      .catch(
+	        err =>{
+	          console.log(err)
+	        }
+	      )
 	  }
 	  else{
 		  this.setState({isLoggedIn: false})
 	  }
 
-  }
-  componentDidUpdate() {
-    this.setState()
-    console.log('COMPONEDIDUPDATE ',this.state.user)
-  }
+	}
+	componentDidUpdate() {
+	  this.setState()
+	  console.log('COMPONEDIDUPDATE ',this.state.user)
+	}
 
 
 
@@ -155,8 +158,8 @@ class Nav extends React.Component {
 	}
 
   handleLogout = () => {
-    localStorage.removeItem('email')
-    this.setState({isLoggedIn:false})
+      localStorage.removeItem('email')
+      this.setState({isLoggedIn:false})
   }
 
 	showWarning = () => {
@@ -304,17 +307,19 @@ class Nav extends React.Component {
 	        />
 
 	        <bp3.ButtonGroup className={styles.buttonGroup}>
-	          <bp3.Popover
-	            content={this.Login()}
-	            target={
-	              <bp3.Button
+	                    <bp3.Button
 	                className={styles.noOutline}
 	                intent={bp3.Intent.PRIMARY}
 	                icon='log-in'
 	                text='Login'
+					onClick={this.context.login}
 	              ></bp3.Button>
+	          {/* <bp3.Popover
+	            content={this.Login()}
+	            target={
+	              
 	            }
-	          ></bp3.Popover>
+	          ></bp3.Popover> */}
 	          <bp3.Popover
 	            content={this.Signup()}
 	            target={
