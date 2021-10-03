@@ -34,7 +34,10 @@ class Lang extends React.Component{
         
     return (
       <bp3.Card interactive className={styles.lang} >
-        <h3 className={'w-full '+styles.title}>{this.props.name}</h3>
+        <div className="flex flex-row w-full">
+          <h3 className={'w-full '+styles.title}>{this.props.name}</h3>
+          <bp3.Button minimal icon="add" intent={bp3.Intent.PRIMARY}/>
+        </div>
         <div className="mar-t"></div>
         <bp3.ButtonGroup vertical className={styles.group}>
           {this.getAllTopic(this.props.topics)}

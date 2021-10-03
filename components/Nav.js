@@ -7,37 +7,6 @@ import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
 
-// function Content() {
-//   return (
-//     <bp3.ButtonGroup vertical className={styles.drop}>
-//       <bp3.Button
-//         className={styles.noOutline}
-//         minimal
-//         text='Python'
-//         intent={bp3.Intent.PRIMARY}
-//       />
-//       <bp3.Button
-//         className={styles.noOutline}
-//         minimal
-//         text='Cpp'
-//         intent={bp3.Intent.PRIMARY}
-//       />
-//       <bp3.Button
-//         className={styles.noOutline}
-//         minimal
-//         text='Java'
-//         intent={bp3.Intent.PRIMARY}
-//       />
-//       <bp3.Button
-//         className={styles.noOutline}
-//         text='Android'
-//         intent={bp3.Intent.PRIMARY}
-//       />
-//     </bp3.ButtonGroup>
-//   )
-// }
-
-
 class Nav extends React.Component {
   constructor(props) {
     super(props)
@@ -120,6 +89,7 @@ class Nav extends React.Component {
 	      if (res.status === 200) {
 	        localStorage.setItem('email', res.data.email)
 	        this.setState({isLoggedIn:true})
+	        this.setState({user:res.data})
 	        Router.push('/user')
 	      }
 	    })
@@ -142,6 +112,7 @@ class Nav extends React.Component {
 	        localStorage.setItem('email', res.data.email)
 	        Router.push('/user')
 	        this.setState({isLoggedIn:true})
+	        this.setState({user:res.data})
 	      }
 	      if (res.status == 201) {
 	        console.log('ERROE', res.data.error)
