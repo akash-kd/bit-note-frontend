@@ -312,7 +312,7 @@ class Nav extends React.Component {
 	                intent={bp3.Intent.PRIMARY}
 	                icon='log-in'
 	                text='Login'
-					onClick={this.context.login}
+	                        onClick={this.context.login}
 	              ></bp3.Button>
 	          {/* <bp3.Popover
 	            content={this.Login()}

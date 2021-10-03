@@ -9,34 +9,34 @@ import Router from 'next/router'
 
 let email = ''
 class user extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      overlay: false,
-      lang:''
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: '',
+            overlay: false,
+            lang:''
+        }
+        this.handleLang.bind(this)
+        this.addLang.bind(this)
     }
-    this.handleLang.bind(this)
-    this.addLang.bind(this)
-  }
 
-  componentDidMount(){
-    const email = localStorage.getItem('email')
-    console.log(email)
-    this.setState({email})
-  }
+    componentDidMount(){
+        const email = localStorage.getItem('email')
+        console.log(email)
+        this.setState({email})
+    }
 
-  handleLang(e) {
-    console.log(e.target.value)
-    email = e.target.value
-  }
-  addLang(){
-    console.log(email)
-    Router.push('/')
-  }
+    handleLang(e) {
+        console.log(e.target.value)
+        email = e.target.value
+    }
+    addLang(){
+        console.log(email)
+        Router.push('/')
+    }
 
 
-  render() {
+    render() {
 
 	  return (
 
@@ -94,7 +94,7 @@ class user extends React.Component {
 	      </div>
 	    </div>	  
 	  )
-  }
+    }
 }
 
 
