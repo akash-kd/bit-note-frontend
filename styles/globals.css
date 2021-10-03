@@ -48,6 +48,10 @@ h3 {
   padding: 0;
 }
 
+.pad {
+  padding: 10px;
+}
+
 .pad-1 {
   padding-left: 16vw;
   padding-right: 16vw;
@@ -72,7 +76,7 @@ h3 {
 
 .container {
   height: calc(100% - 50px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #__next {
