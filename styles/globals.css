@@ -120,4 +120,14 @@ h3 {
   grid-template-columns: repeat(auto-fit, 210px);
   grid-auto-rows: auto;
   gap: 20px;
+}
+
+.add {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  z-index: 10;
+  background-color: rgba(24, 32, 38, 0.8);
 }/*# sourceMappingURL=globals.css.map */

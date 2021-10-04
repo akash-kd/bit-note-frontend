@@ -6,6 +6,7 @@ import Lang from '../components/Lang'
 import styles from '../styles/user.module.css'
 import axios from 'axios'
 import Router from 'next/router'
+import Add from '../components/Add'
 
 let email = ''
 class user extends React.Component {
@@ -16,8 +17,8 @@ class user extends React.Component {
       overlay: false,
       lang:''
     }
-    this.handleLang.bind(this)
-    this.addLang.bind(this)
+
+    this.toggle.bind(this)
   }
 
   componentDidMount(){
@@ -26,42 +27,26 @@ class user extends React.Component {
     this.setState({email})
   }
 
-  handleLang(e) {
-    console.log(e.target.value)
-    email = e.target.value
-  }
-  addLang(){
-    console.log(email)
-    Router.push('/')
+  toggle(){
+	  this.setState({overlay:!this.state.overlay})
+	  console.log('ADD Clicked')
   }
 
 
   render() {
-
+    console.log(this.state.overlay)
 	  return (
 
-	    <div className="w-full mar-0 pad-1 pad-tb">
+	    <div className="w-full h-full mar-0 pad-1 pad-tb">
 	      
 	      <div className="flex flex-row w-full">
           
+		  
 	        <h2 className="mar-0">Laguages</h2>
 	        <div className="w-full"></div>
 
-	        <bp3.Popover 
-	          content={
-	            <bp3.Card className='pad'>
-	              <h3 className="mar-1">Enter the name of the programming language</h3>
-	              <bp3.InputGroup onChange={this.handleLang} className="mar-1" onSubmit={this.handleLang} >
-	              </bp3.InputGroup>
-	              <bp3.ButtonGroup className="mar-1">
-					  <bp3.Button text="cancel"></bp3.Button>
-					  <bp3.Button onClick={this.addLang} text="add" intent={bp3.Intent.PRIMARY} icon='plus'></bp3.Button>
-	              </bp3.ButtonGroup>
-				  </bp3.Card>
-	          }
-	          target={<bp3.Button className="add-btn" intent={bp3.Intent.PRIMARY} icon="plus" onClick={this.toggleOverlay}>Add Language</bp3.Button>}>
+	       <bp3.Button onClick={(e)=>{this.toggle()}} className="add-btn" intent={bp3.Intent.PRIMARY} icon="plus">Add Language</bp3.Button>
 
-			  </bp3.Popover>
 	        
 
 	      </div>
@@ -92,6 +77,7 @@ class user extends React.Component {
 
 
 	      </div>
+		  <Add openPortal={this.state.overlay}/>
 	    </div>	  
 	  )
   }
