@@ -48,10 +48,6 @@ h3 {
   padding: 0;
 }
 
-.pad {
-  padding: 10px;
-}
-
 .pad-1 {
   padding-left: 16vw;
   padding-right: 16vw;
@@ -76,7 +72,7 @@ h3 {
 
 .container {
   height: calc(100% - 50px);
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 #__next {
@@ -130,4 +126,13 @@ h3 {
   left: 0px;
   z-index: 10;
   background-color: rgba(24, 32, 38, 0.8);
+}
+
+.bp3-overlay-content {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }/*# sourceMappingURL=globals.css.map */

@@ -11,18 +11,12 @@
   "dependencies": {
     "@blueprintjs/core": "^3.50.2",
     "axios": "^0.21.4",
-    "netlify-identity-widget": "^1.9.2",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-next": "11.1.2",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2"
   }
 }

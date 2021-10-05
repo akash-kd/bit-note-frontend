@@ -1,9 +1,11 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": ["prettier"],
   "rules": {
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
-    "indent": ["error",2]
+    "indent": [
+      "error",
+      4
+    ]
   }
 }
