@@ -5,7 +5,7 @@
     "semi": ["error", "never"],
     "indent": [
       "error",
-      4
+      2
     ]
   }
 }

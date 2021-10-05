@@ -7,22 +7,51 @@ import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
 class Nav extends React.Component {
-    constructor(props) {
-        super(props)
-        this.Login.bind(this)
-        this.Signup.bind(this)
-        this.handleName.bind(this)
-        this.handleEmail.bind(this)
-        this.handlePassword.bind(this)
-        this.handleLogin.bind(this)
-        this.handleSignup.bind(this)
-        this.showWarning.bind(this)
-        this.getElements.bind(this)
+  constructor(props) {
+    super(props)
+    this.Login.bind(this)
+    this.Signup.bind(this)
+    this.handleName.bind(this)
+    this.handleEmail.bind(this)
+    this.handlePassword.bind(this)
+    this.handleLogin.bind(this)
+    this.handleSignup.bind(this)
+    this.showWarning.bind(this)
+    this.getElements.bind(this)
 
-        this.state = {
-            warn: '',
-        }
+    this.state = {
+      warn: '',
+      user: {},
     }
+  }
+
+  componentDidMount() {
+    const email = localStorage.getItem('email')
+  
+    if (email) {
+      this.setState({isLoggedIn: true})
+      axios.post('http://localhost:3030/user/getuser',{email:email})
+		  .then(
+          res => {
+			  this.setState({
+              user: res.data,
+			  })
+          })
+		  .catch(
+          err =>{
+			  console.log(err)
+          }
+		  )
+    }
+    else{
+      this.setState({isLoggedIn: false})
+    }
+  
+  }
+  componentDidUpdate() {
+	  this.setState()
+	  console.log('COMPONEDIDUPDATE ',this.state.user)
+  }
 
 	handleName = (e) => {
 	  console.log(e.target.value)
@@ -55,6 +84,8 @@ class Nav extends React.Component {
 	      }
 	      if (res.status === 200) {
 	        localStorage.setItem('email', res.data.email)
+	        this.setState({isLoggedIn:true})
+	        this.setState({ user:res.data})
 	        Router.push('/user')
 	      }
 	    })
@@ -76,6 +107,8 @@ class Nav extends React.Component {
 	        this.setState({ warn: '' })
 	        localStorage.setItem('email', res.data.email)
 	        Router.push('/user')
+	        this.setState({user:res.data})
+	        this.setState({isLoggedIn:true})
 	      }
 	      if (res.status == 201) {
 	        console.log('ERROE', res.data.error)
@@ -86,6 +119,12 @@ class Nav extends React.Component {
 	    .catch(function (error) {
 	      console.log(error)
 	    })
+	}
+
+	handleLogout = () => {
+	  localStorage.removeItem('email')
+	  this.setState({isLoggedIn:false})
+	  this.setState({user:{}})
 	}
 
 	showWarning = () => {
@@ -169,9 +208,61 @@ class Nav extends React.Component {
 	    </bp3.Callout>
 	  )
 	}
+
+	Account(){
+
+	  return (
+		  <bp3.ButtonGroup vertical>
+	      <bp3.Button text="setting" icon="cog"/>
+	      <bp3.Button text="logout" onClick={this.handleLogout} intent={bp3.Intent.DANGER} icon="log-out"/>
+		  </bp3.ButtonGroup>
+	  )
+  
+	  }
 	getElements() {
-	  if (false) {
-	  } else {
+	  let userButton = <></>
+	  console.log('USER', this.state.user)
+	  if(!this.state.user){
+		  userButton = <bp3.Button 	          
+	      className={styles.button}
+	      intent={bp3.Intent.PRIMARY}
+	      loading
+	    >
+	    </bp3.Button>
+	  }
+	  else{
+		  userButton = 
+		  <bp3.Popover
+		    content={this.Account()}
+		    target = {		  
+			  <bp3.Button 	          
+		        className={styles.button}
+		        intent={bp3.Intent.PRIMARY}
+			  icon="user"
+			  >
+		        {this.state.user.name}
+			  </bp3.Button>
+		    }
+		  >
+  
+		  </bp3.Popover>
+  
+	  }
+
+	  if (this.state.isLoggedIn) {
+	    return(
+	      <bp3.Navbar.Group align={bp3.Alignment.RIGHT}>
+			  <bp3.Button
+	          className={styles.button}
+	          intent={bp3.Intent.PRIMARY}
+	          icon={this.props.icon}
+	          onClick={() => this.props.changeTheme()}
+			  />
+			  {userButton}
+	      </bp3.Navbar.Group>
+		  )
+	  }
+	  else {
 	    return (
 	      <bp3.Navbar.Group align={bp3.Alignment.RIGHT}>
 	        <bp3.Button

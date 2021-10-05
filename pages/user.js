@@ -9,22 +9,22 @@ import Router from 'next/router'
 import Add from '../components/Add'
 
 class user extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            overlay: false
-        }
-        this.toggleOverlay.bind(this)
-        this.handleName.bind(this)
-        this.addLang.bind(this)
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      overlay: false
     }
+    this.toggleOverlay.bind(this)
+    this.handleName.bind(this)
+    this.addLang.bind(this)
+  }
 
-    componentDidMount(){
-        const email = localStorage.getItem('email')
-        console.log(email)
-        this.setState({email})
-    }
+  componentDidMount(){
+    const email = localStorage.getItem('email')
+    console.log(email)
+    this.setState({email})
+  }
 
 	toggleOverlay = () => {
 	  console.log('ON CLOSE')
