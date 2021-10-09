@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
+import { authCtx } from '../context/authCtx'
 class Nav extends React.Component {
   constructor(props) {
     super(props)
@@ -24,6 +25,7 @@ class Nav extends React.Component {
       user: {},
     }
   }
+  static contextType = authCtx
 
   componentDidMount() {
     const email = localStorage.getItem('email')
@@ -36,6 +38,7 @@ class Nav extends React.Component {
 			  this.setState({
               user: res.data,
 			  })
+			  this.context.setUser(res.data)
           })
 		  .catch(
           err =>{
@@ -68,10 +71,10 @@ class Nav extends React.Component {
 	  this.setState({ password: e.target.value })
 	}
 
-	handleLogin = () => {
+	handleLogin = async () => {
 	  console.log(this.state.email)
 	  console.log(this.state.password)
-	  axios
+	  await axios
 	    .post('http://localhost:3030/user/signin', {
 	      email: this.state.email,
 	      password: this.state.password,
@@ -84,8 +87,9 @@ class Nav extends React.Component {
 	      }
 	      if (res.status === 200) {
 	        localStorage.setItem('email', res.data.email)
-	        this.setState({isLoggedIn:true})
-	        this.setState({ user:res.data})
+	        this.setState({isLoggedIn:true, user:res.data, warn:''})
+	        this.context.setUser(res.data)
+	        this.context.setAuth(true)
 	        Router.push('/user')
 	      }
 	    })
@@ -107,8 +111,9 @@ class Nav extends React.Component {
 	        this.setState({ warn: '' })
 	        localStorage.setItem('email', res.data.email)
 	        Router.push('/user')
-	        this.setState({user:res.data})
-	        this.setState({isLoggedIn:true})
+	        this.setState({isLoggedIn:true, user:res.data, warn:''})
+	        this.context.setUser(res.data)
+	        this.context.setAuth(true)
 	      }
 	      if (res.status == 201) {
 	        console.log('ERROE', res.data.error)
@@ -125,19 +130,67 @@ class Nav extends React.Component {
 	  localStorage.removeItem('email')
 	  this.setState({isLoggedIn:false})
 	  this.setState({user:{}})
+	  this.context.setUser({})
+	  this.context.setAuth(false)
+	  Router.push('/')
 	}
 
-	showWarning = () => {
-	  if (this.state.warn == '') {
-	    return <></>
-	  } else {
-	    return (
-	      <bp3.FormGroup>
-	        <bp3.Callout intent={bp3.Intent.DANGER}>
-	          {this.state.warn}
-	        </bp3.Callout>
-	      </bp3.FormGroup>
-	    )
+	
+	async loginOnEnter(e){
+	  if(e.key == 'Enter'){
+	    await axios
+	      .post('http://localhost:3030/user/signin', {
+	        email: this.state.email,
+	      password: this.state.password,
+	    })
+	    .then((res) => {
+	        console.log(res.status)
+	        if (res.status === 201) {
+	        this.setState({ warn: res.data.message })
+	        localStorage.removeItem('email')
+
+	      }
+	      if (res.status === 200) {
+	        localStorage.setItem('email', res.data.email)
+	        this.setState({isLoggedIn:true, user:res.data, warn:''})
+	        this.context.setUser(res.data)
+	        this.context.setAuth(true)
+	        Router.push('/user')
+	      }
+	    })
+	    .catch((err) => {
+	      console.log(err)
+	    })
+	  }
+	}
+
+	async signupOnEnter(e){
+	  if(e.key == 'Enter'){
+	    await axios
+	      .post('http://localhost:3030/user/signup', {
+			  name: this.state.name,
+			  email: this.state.email,
+			  password: this.state.password,
+	      })
+	      .then((res) => {
+			  console.log(res)
+			  if (res.status === 200) {
+	          this.setState({ warn: '' })
+	          localStorage.setItem('email', res.data.email)
+	          Router.push('/user')
+			  this.setState({isLoggedIn:true, user:res.data, warn:''})
+	          this.context.setUser(res.data)
+	          this.context.setAuth(true)
+			  }
+			  if (res.status == 201) {
+	          console.log('ERROE', res.data.error)
+	          localStorage.removeItem('email')
+	          this.setState({ warn: res.data.error })
+			  }
+	      })
+	      .catch(function (error) {
+			  console.log(error)
+	      })
 	  }
 	}
 	Login() {
@@ -149,6 +202,7 @@ class Nav extends React.Component {
 	          placeholder='email'
 	          leftIcon='envelope'
 	          onChange={this.handleEmail}
+			  onKeyPress={this.loginOnEnter.bind(this)}
 	        />
 	      </bp3.FormGroup>
 	      <bp3.FormGroup labelFor='password'>
@@ -158,6 +212,7 @@ class Nav extends React.Component {
 	          leftIcon='lock'
 	          type='password'
 	          onChange={this.handlePassword}
+			  onKeyPress={this.loginOnEnter.bind(this)}
 	        />
 	      </bp3.FormGroup>
 	      {this.showWarning()}
@@ -179,6 +234,7 @@ class Nav extends React.Component {
 	          placeholder='name'
 	          leftIcon='person'
 	          onChange={this.handleName}
+			  onKeyPress={this.signupOnEnter.bind(this)}
 	        />
 	      </bp3.FormGroup>
 	      <bp3.FormGroup labelFor='username'>
@@ -187,6 +243,7 @@ class Nav extends React.Component {
 	          placeholder='email'
 	          leftIcon='envelope'
 	          onChange={this.handleEmail}
+			  onKeyPress={this.signupOnEnter.bind(this)}
 	        />
 	      </bp3.FormGroup>
 	      <bp3.FormGroup labelFor='password'>
@@ -196,6 +253,7 @@ class Nav extends React.Component {
 	          leftIcon='lock'
 	          type='password'
 	          onChange={this.handlePassword}
+			  onKeyPress={this.signupOnEnter.bind(this)}
 	        />
 	      </bp3.FormGroup>
 	      {this.showWarning()}
@@ -219,7 +277,21 @@ class Nav extends React.Component {
 	  )
   
 	  }
-	getElements() {
+
+	  showWarning = () => {
+	    if (this.state.warn == '') {
+		  return <></>
+	    } else {
+		  return (
+	        <bp3.FormGroup>
+			  <bp3.Callout intent={bp3.Intent.DANGER}>
+	            {this.state.warn}
+			  </bp3.Callout>
+	        </bp3.FormGroup>
+		  )
+	    }
+	  }
+	  getElements() {
 	  let userButton = <></>
 	  console.log('USER', this.state.user)
 	  if(!this.state.user){
@@ -299,9 +371,9 @@ class Nav extends React.Component {
 	      </bp3.Navbar.Group>
 	    )
 	  }
-	}
+	  }
 
-	render() {
+	  render() {
 	  let str = 'Bit Note'
 
 	  return (
@@ -347,7 +419,7 @@ class Nav extends React.Component {
 	      </bp3.Navbar>
 	    </div>
 	  )
-	}
+	  }
 }
 
 export default Nav

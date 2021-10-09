@@ -5,9 +5,16 @@
   height: fit-content;
   margin: 8px;
   padding: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .title {
@@ -20,12 +27,15 @@
 
 .btn span svg {
   color: transparent !important;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
+
 .btn:hover span svg {
   color: #a7b6c2 !important;
 }
 
 .group {
   width: 200px;
-}/*# sourceMappingURL=lang.module.css.map */
+}
+/*# sourceMappingURL=lang.module.css.map */
