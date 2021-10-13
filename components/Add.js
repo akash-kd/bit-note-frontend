@@ -3,7 +3,6 @@ import * as bp3 from '@blueprintjs/core'
 
 class Add extends React.Component{
   constructor(props){
-    console.log('ADD CONST')
     super(props)
     this.toggle.bind(this)
     this.state = {isOpen:!this.props.openPortal}
@@ -13,11 +12,9 @@ class Add extends React.Component{
 
   toggle(){
     this.setState({isOpen:!this.state.isOpen})
-    console.log('DIV CLICKED',this.state.isOpen)
   }
 
   render(){
-    console.log('ADD RENCER',this.state.isOpen,this.props.openPortal)
     if(this.props.openPortal && !this.state.isOpen ){
       return (
         <bp3.Callout className="container flex pad-tb add flex center" onClick={(e)=>{this.toggle()}}>

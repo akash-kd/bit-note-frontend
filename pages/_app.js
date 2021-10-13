@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 import {authCtx,auth,AuthProvider} from '../context/authCtx'
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
+    <AuthProvider >
       <Layout>
         <Component {...pageProps} />
       </Layout>

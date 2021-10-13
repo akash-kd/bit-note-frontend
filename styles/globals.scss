@@ -80,6 +80,9 @@ h3{
   height: calc(100% - 50px);
   overflow-y: scroll;
 }
+.scroll-x{
+  overflow-x: scroll;
+}
 #__next{
   height: 100%;
   width: 100%;
@@ -101,6 +104,10 @@ h3{
 .flex-col{
   flex-direction: column;
 }
+
+.space-btw{
+  justify-content: space-between;
+}
 .bp3-dark{
   background-color: #182026 !important;
   .divider{
@@ -110,7 +117,12 @@ h3{
 
 .add-btn{
   height: 20px;
-  width: 210px;
+  white-space: nowrap;
+  text-align: center;
+  // padding-left:10px;
+  // padding-right: 10px;
+  // padding-top: 5px;
+  // padding-bottom: 5px;
 }
 .langs{
   display: grid;
@@ -136,6 +148,14 @@ h3{
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+.btn-icon span svg {
+  color: transparent !important;
+  transition: 0.5s;
+}
+.btn-icon:hover span svg {
+  color: #a7b6c2 !important;
 }
 
 

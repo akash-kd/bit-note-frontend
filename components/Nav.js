@@ -27,42 +27,16 @@ class Nav extends React.Component {
   }
   static contextType = authCtx
 
-  componentDidMount() {
-    const email = localStorage.getItem('email')
-  
-    if (email) {
-      this.setState({isLoggedIn: true})
-      axios.post('http://localhost:3030/user/getuser',{email:email})
-		  .then(
-          res => {
-			  this.setState({
-              user: res.data,
-			  })
-			  this.context.setUser(res.data)
-          })
-		  .catch(
-          err =>{
-			  console.log(err)
-          }
-		  )
-    }
-    else{
-      this.setState({isLoggedIn: false})
-    }
-  
-  }
+
   componentDidUpdate() {
 	  this.setState()
-	  console.log('COMPONEDIDUPDATE ',this.state.user)
   }
 
 	handleName = (e) => {
-	  console.log(e.target.value)
 	  this.setState({ name: e.target.value })
 	}
 
 	handleEmail = (e) => {
-	  console.log(e.target.value)
 	  this.setState({ email: e.target.value })
 	}
 
@@ -80,7 +54,6 @@ class Nav extends React.Component {
 	      password: this.state.password,
 	    })
 	    .then((res) => {
-	      console.log(res.status)
 	      if (res.status === 201) {
 	        this.setState({ warn: res.data.message })
 	        localStorage.removeItem('email')
@@ -94,7 +67,6 @@ class Nav extends React.Component {
 	      }
 	    })
 	    .catch((err) => {
-	      console.log(err)
 	    })
 	}
 
@@ -106,7 +78,6 @@ class Nav extends React.Component {
 	      password: this.state.password,
 	    })
 	    .then((res) => {
-	      console.log(res)
 	      if (res.status === 200) {
 	        this.setState({ warn: '' })
 	        localStorage.setItem('email', res.data.email)
@@ -116,14 +87,11 @@ class Nav extends React.Component {
 	        this.context.setAuth(true)
 	      }
 	      if (res.status == 201) {
-	        console.log('ERROE', res.data.error)
 	        localStorage.removeItem('email')
 	        this.setState({ warn: res.data.error })
 	      }
 	    })
-	    .catch(function (error) {
-	      console.log(error)
-	    })
+	    .catch()
 	}
 
 	handleLogout = () => {
@@ -144,7 +112,6 @@ class Nav extends React.Component {
 	      password: this.state.password,
 	    })
 	    .then((res) => {
-	        console.log(res.status)
 	        if (res.status === 201) {
 	        this.setState({ warn: res.data.message })
 	        localStorage.removeItem('email')
@@ -173,7 +140,6 @@ class Nav extends React.Component {
 			  password: this.state.password,
 	      })
 	      .then((res) => {
-			  console.log(res)
 			  if (res.status === 200) {
 	          this.setState({ warn: '' })
 	          localStorage.setItem('email', res.data.email)
@@ -183,14 +149,11 @@ class Nav extends React.Component {
 	          this.context.setAuth(true)
 			  }
 			  if (res.status == 201) {
-	          console.log('ERROE', res.data.error)
 	          localStorage.removeItem('email')
 	          this.setState({ warn: res.data.error })
 			  }
 	      })
-	      .catch(function (error) {
-			  console.log(error)
-	      })
+	      .catch()
 	  }
 	}
 	Login() {
@@ -293,8 +256,7 @@ class Nav extends React.Component {
 	  }
 	  getElements() {
 	  let userButton = <></>
-	  console.log('USER', this.state.user)
-	  if(!this.state.user){
+	  if(JSON.stringify(this.context.user) === '{}'){
 		  userButton = <bp3.Button 	          
 	      className={styles.button}
 	      intent={bp3.Intent.PRIMARY}
@@ -312,7 +274,7 @@ class Nav extends React.Component {
 		        intent={bp3.Intent.PRIMARY}
 			  icon="user"
 			  >
-		        {this.state.user.name}
+		        {this.context.user.name}
 			  </bp3.Button>
 		    }
 		  >
@@ -321,7 +283,7 @@ class Nav extends React.Component {
   
 	  }
 
-	  if (this.state.isLoggedIn) {
+	  if (JSON.stringify(this.context.user) !== '{}') {
 	    return(
 	      <bp3.Navbar.Group align={bp3.Alignment.RIGHT}>
 			  <bp3.Button

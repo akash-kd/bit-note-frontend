@@ -3,11 +3,12 @@ import Head from 'next/head'
 import React from 'react'
 import * as bp3 from '@blueprintjs/core'
 import Lang from '../components/Lang'
+import AllLangs from '../components/AllLangs'
 import styles from '../styles/user.module.css'
 import axios from 'axios'
-import Router from 'next/router'
-import Add from '../components/Add'
 import {authCtx} from '../context/authCtx'
+
+
 
 class user extends React.Component {
   constructor(props) {
@@ -27,13 +28,11 @@ class user extends React.Component {
 
   componentDidMount(){
     const email = localStorage.getItem('email')
-    console.log(email)
     this.setState({email})
-    console.log('USER PAGE CMPT MOUNT',this.context.user)
   }
 
 	toggleOverlay = () => {
-	  console.log('ON CLOSE')
+
 	  this.setState({overlay: !this.state.overlay})
 	}
 
@@ -41,22 +40,17 @@ class user extends React.Component {
 	    this.setState({name: e.target.value})
 	}
 
-	 addLang = async (e) =>{
-	   console.log(this.context.user)
+	addLang = async (e) =>{
 	   if (this.state.name){
 	     await axios.post('http://localhost:3030/lang/addLang',{
 	       name: this.state.name,
 	       createdBy: this.context.user
 		  }).then( res => {
-	       console.log(res)
-	       console.log('LANG CREATED')
 		   this.setState({
 	         warn:'',
 	         showWarn: false
 	       })
 		  }).catch(err => {
-	       console.log(err.message)
-	       console.log('LANG NOT CREATED')
 		  })
 	   }
 	   else{
@@ -79,9 +73,9 @@ class user extends React.Component {
 	  if(this.state.email){
 	    return(
 	      <>
-	        <div className="flex flex-row w-full">
+	        <div className="flex flex-row w-full space-btw">
 	        <h2 className="mar-0">Laguages</h2>
-	        <div className="w-full" onClick={this.toggleOverlay}></div>
+	        {/* <div className="w-full"></div> */}
 	        <bp3.Button className="add-btn" intent={bp3.Intent.PRIMARY} icon="plus" onClick={this.toggleOverlay}>Add Language</bp3.Button>
 	          <bp3.Overlay isOpen={this.state.overlay} onClose={this.toggleOverlay} canOutsideClickClose={true} canEscapeKeyClose={true} enforceFocus usePortal={false}>
 	            <div className='flex center'>
@@ -102,27 +96,7 @@ class user extends React.Component {
 	          </bp3.Overlay>
 	      </div>	
 	      <bp3.Divider className="divider"/>
-	      <div className="langs">
-	        <div>
-	          <Lang name="Python" topics={['Django','Pyqt5','NLP','Comp Codin','Machin Learning']}/>
-	          <Lang name="Javascript" topics={['Express','Mango','React']}/>
-	          <Lang name="Flutter" topics={['Componentsassasa','Scss','Macros','NLP']}/>
-	        </div>
-	        <div>
-	          <Lang name="C++" topics={['Templates','Macros','Comp Codin']}/>
-	          <Lang name="Flutter" topics={['Components','Scss','Macros','NLP','Macros','NLP']}/>
-
-	        </div>
-	        <div>
-	          <Lang name="C++" topics={['Templates','Macros','Comp Codin']}/>
-	          <Lang name="Flutter" topics={['Components','Scss','Macros','NLP']}/>
-	          <Lang name="Flutter" topics={['Componentsassasa','Scss','Macros','NLP']}/>
-	        </div>
-	        <div>
-	          <Lang name="C++" topics={['Macros','Comp Codin']}/>
-	          <Lang name="Flutter" topics={['Componentsassasa','Scss']}/>
-	        </div>
-	      </div>
+	        <AllLangs user={this.context.user}/>
 		  </>
 	    )
 	  }

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import * as bp3 from '@blueprintjs/core'
 import styles from '../styles/components/lang.module.css'
 import { Divider } from '@blueprintjs/core'
+import Link from 'next/link'
 
 class Lang extends React.Component{
 
@@ -10,6 +11,9 @@ class Lang extends React.Component{
     super(props)
     this.topic.bind(this)
     this.getAllTopic.bind(this)
+  }
+  static defaultProps = {
+    topics: []
   }
   getAllTopic(arr){
     let elem = []
@@ -25,19 +29,25 @@ class Lang extends React.Component{
     </bp3.Button>
   }
 
+
   render(){
      
     return (
-      <bp3.Card interactive className={styles.lang} >
-        <div className="flex flex-row w-full">
-          <h3 className={'w-full '+styles.title}>{this.props.name}</h3>
-          <bp3.Button minimal icon="add" intent={bp3.Intent.PRIMARY}/>
-        </div>
-        <div className="mar-t"></div>
-        <bp3.ButtonGroup vertical className={styles.group}>
-          {this.getAllTopic(this.props.topics)}
-        </bp3.ButtonGroup>
-      </bp3.Card>
+      <>
+        <Link href={'/langs/'+ this.props.name +'?id='+this.props.id} passHref>
+          <bp3.Card interactive className={styles.lang} onClick={this.goto}>
+            <div className="flex flex-row w-full">
+              <h3 className={'w-full '+styles.title}>{this.props.name}</h3>
+              <Link href={'/langs/'+ this.props.name +'?id='+this.props.id} passHref><bp3.Button minimal icon="chevron-right" intent={bp3.Intent.PRIMARY} onClick={this.goto}/></Link>
+            </div>
+            <div className="mar-t"></div>
+            <bp3.ButtonGroup vertical className={styles.group}>
+              {this.getAllTopic(this.props.topics)}
+            </bp3.ButtonGroup>
+          </bp3.Card>
+        </Link>
+
+      </>
     )
   }
 }

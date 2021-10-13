@@ -12,10 +12,23 @@ class Layout extends react.Component {
   }
   static contextType = authCtx
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
       theme: localStorage.getItem('theme'),
     })
+    
+    if(localStorage.getItem('email')){
+      await axios.post('http://localhost:3030/user/getuserandlangs', {email: localStorage.getItem('email')})
+        .then( res =>{
+          this.context.setUser(res.data.user)
+          this.context.setLangs(res.data.langs)
+        })
+        .catch(
+          err => {
+            console.log(err)
+          }
+        )
+    }
   }
 
   changeTheme() {
@@ -31,8 +44,9 @@ class Layout extends react.Component {
       localStorage.setItem('theme', 'dark')
     }
   }
+  
   render() {
-	  console.log('WHOLE RENDER',this.context.user,this.context.isAuth)
+    console.log('render')
     return (
       <bp3.Callout className={'bp3-' + this.state.theme + ' h-full w-full pad-0'}>
         <Nav
