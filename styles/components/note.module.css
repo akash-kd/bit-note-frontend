@@ -1,0 +1,37 @@
+.note {
+  display: grid;
+  grid-template-areas: "title title" "div div" "desc code";
+  grid-template-rows: 40px auto;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+  padding: 8px;
+  margin: 10px;
+  height: 300px;
+}
+
+.title {
+  grid-area: title;
+  align-items: center;
+  display: flex;
+  padding: 5px;
+}
+
+.divider {
+  grid-area: div;
+  margin: 0;
+}
+
+.desc {
+  grid-area: desc;
+  height: auto;
+  overflow-y: auto;
+  word-wrap: break-word;
+  padding: 5px;
+}
+
+.code {
+  grid-area: code;
+  height: auto;
+  word-wrap: break-word;
+  padding: 5px;
+}/*# sourceMappingURL=note.module.css.map */

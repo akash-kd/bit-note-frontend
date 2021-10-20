@@ -32,6 +32,16 @@ h3 {
   font-weight: 600;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #e9f7ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1c91fe;
+  border-radius: 10px;
+}
+
 .navbar {
   background-color: #1c91fe !important;
 }
@@ -82,11 +92,7 @@ h3 {
 
 .container {
   height: calc(100% - 50px);
-  overflow-y: scroll;
-}
-
-.scroll-x {
-  overflow-x: scroll;
+  overflow-y: auto;
 }
 
 #__next {

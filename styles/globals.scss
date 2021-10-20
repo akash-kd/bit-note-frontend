@@ -35,6 +35,17 @@ h2, h3, h4, h5, h6 {
 h3{
   font-weight:600;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: $s;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $p;
+  border-radius: 10px;
+
+}
 .navbar{
   background-color: $p !important;
 }
@@ -78,10 +89,7 @@ h3{
 }
 .container{
   height: calc(100% - 50px);
-  overflow-y: scroll;
-}
-.scroll-x{
-  overflow-x: scroll;
+  overflow-y: auto;
 }
 #__next{
   height: 100%;
@@ -157,6 +165,8 @@ h3{
 .btn-icon:hover span svg {
   color: #a7b6c2 !important;
 }
+
+
 
 
 

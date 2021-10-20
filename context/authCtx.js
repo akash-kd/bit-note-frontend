@@ -27,7 +27,12 @@ async function getUser(){
 }
 
 export const AuthProvider = ({children}) =>{
-  const [isAuth, setAuth] = useState(false)
+  
+  let isEmail = false
+  if(email()){
+    isEmail = true
+  }
+  const [isAuth, setAuth] = useState(isEmail)
   const [user, setUser] = useState({})
   const [langs, setLangs] = useState([])
 
