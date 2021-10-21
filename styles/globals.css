@@ -33,13 +33,12 @@ h3 {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: #e9f7ff;
+  width: 5px;
+  background-color: rgba(28, 145, 254, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #1c91fe;
-  border-radius: 10px;
 }
 
 .navbar {
@@ -169,4 +168,9 @@ h3 {
 
 .btn-icon:hover span svg {
   color: #a7b6c2 !important;
+}
+
+.bp3-dialog-container {
+  position: relative;
+  top: 0px;
 }/*# sourceMappingURL=globals.css.map */

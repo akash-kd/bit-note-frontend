@@ -13,16 +13,36 @@ class Note extends React.Component {
     console.log(this.props)
     return(
       <bp3.Card className={styles.note}>
-        <div className={styles.title}><h3>How to create basic note</h3></div>
+        <div className={styles.title + ' space-btw'}>
+          <h3>How to create basic note</h3>
+          <bp3.Popover 
+            placement="bottom-right"
+            minimal
+            content={
+              <bp3.Menu>
+                <bp3.MenuItem icon="edit" text="Edit" />
+                <bp3.MenuItem icon="delete" text="Delete" intent={bp3.Intent.DANGER}/>
+                <bp3.MenuDivider title="resize"/>
+                <bp3.MenuItem icon="zoom-in" text="Increase" />
+                <bp3.MenuItem icon="zoom-out" text="Decrease" />
+              </bp3.Menu>
+            }
+            target={<bp3.Button icon="more" minimal></bp3.Button>}
+          >
+          </bp3.Popover>
+        </div>
         <bp3.Divider className={styles.divider}/>
         
-        <div className={styles.desc}><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></p></div>
+        <div className={styles.desc}><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        <br/><br/><br/><br/><br/><br/><br/><br/>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p></div>
         <div className={styles.code}>    
           <Editor
             width="auto"
             theme="vs-dark"
             defaultLanguage="javascript"
             defaultValue="// let's write some broken code 😈"
+            onChange={(newValue, e) => console.log(newValue, e)}
           />
         </div>
       </bp3.Card>

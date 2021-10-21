@@ -8,31 +8,11 @@ export const authCtx = createContext({
   user: {}
 })
 
-async function email(){
-  let email = await localStorage.getItem('email')
-  return email
-}
 
-async function getUser(){
-  const e = await email()
-  let data = {}
-  if (e) {
-    await axios.post('http://localhost:3030/user/getuser',{email:e})
-      .then(res => {
-        data = res.data
-      })
-  }
-
-  return data
-}
 
 export const AuthProvider = ({children}) =>{
   
-  let isEmail = false
-  if(email()){
-    isEmail = true
-  }
-  const [isAuth, setAuth] = useState(isEmail)
+  const [isAuth, setAuth] = useState(false)
   const [user, setUser] = useState({})
   const [langs, setLangs] = useState([])
 

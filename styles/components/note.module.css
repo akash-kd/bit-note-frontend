@@ -4,9 +4,8 @@
   grid-template-rows: 40px auto;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
-  padding: 8px;
+  padding: 10px;
   margin: 10px;
-  height: 300px;
 }
 
 .title {
@@ -23,10 +22,12 @@
 
 .desc {
   grid-area: desc;
-  height: auto;
+  height: 200px;
   overflow-y: auto;
   word-wrap: break-word;
   padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .code {

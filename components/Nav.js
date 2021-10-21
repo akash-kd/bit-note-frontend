@@ -28,9 +28,6 @@ class Nav extends React.Component {
   static contextType = authCtx
 
 
-  componentDidUpdate() {
-	  this.setState()
-  }
 
 	handleName = (e) => {
 	  this.setState({ name: e.target.value })
@@ -256,6 +253,7 @@ class Nav extends React.Component {
 	  }
 	  getElements() {
 	  let userButton = <></>
+	  // if there is no user in context, show login button
 	  if(JSON.stringify(this.context.user) === '{}'){
 		  userButton = <bp3.Button 	          
 	      className={styles.button}
@@ -264,6 +262,7 @@ class Nav extends React.Component {
 	    >
 	    </bp3.Button>
 	  }
+	  // shows the name of the user if there is a user in context
 	  else{
 		  userButton = 
 		  <bp3.Popover
@@ -282,7 +281,7 @@ class Nav extends React.Component {
 		  </bp3.Popover>
   
 	  }
-
+	  // theme chaning button + login or user button
 	  if (JSON.stringify(this.context.user) !== '{}') {
 	    return(
 	      <bp3.Navbar.Group align={bp3.Alignment.RIGHT}>
@@ -337,7 +336,6 @@ class Nav extends React.Component {
 
 	  render() {
 	  let str = 'Bit Note'
-
 	  return (
 	    <div>
 	      <Head>

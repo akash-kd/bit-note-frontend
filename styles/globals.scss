@@ -37,13 +37,12 @@ h3{
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: $s;
+  width: 5px;
+  background-color:rgba(28,145,254,0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $p;
-  border-radius: 10px;
+  background-color: rgba(28,145,254.0.5);
 
 }
 .navbar{
@@ -113,6 +112,7 @@ h3{
   flex-direction: column;
 }
 
+
 .space-btw{
   justify-content: space-between;
 }
@@ -164,6 +164,10 @@ h3{
 }
 .btn-icon:hover span svg {
   color: #a7b6c2 !important;
+}
+.bp3-dialog-container{
+  position: relative;
+  top: 0px;
 }
 
 

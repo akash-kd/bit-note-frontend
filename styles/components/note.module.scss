@@ -9,9 +9,8 @@ $inner-pad:5px;
     grid-template-rows: 40px auto;
     grid-template-columns: 1fr 1fr;
     grid-gap: $inner-pad;
-    padding: 8px;
+    padding: 10px;
     margin: 10px;
-    height: 300px;
 }
 
 .title{
@@ -28,10 +27,12 @@ $inner-pad:5px;
 
 .desc{
     grid-area: desc;
-    height: auto; 
+    height: 200px; 
     overflow-y: auto;
     word-wrap: break-word;
     padding: $inner-pad;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .code{
     grid-area: code;    

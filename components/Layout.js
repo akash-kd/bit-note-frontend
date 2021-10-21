@@ -20,6 +20,7 @@ class Layout extends react.Component {
     if(localStorage.getItem('email')){
       await axios.post('http://localhost:3030/user/getuserandlangs', {email: localStorage.getItem('email')})
         .then( res =>{
+          this.context.setAuth(true)
           this.context.setUser(res.data.user)
           this.context.setLangs(res.data.langs)
         })
