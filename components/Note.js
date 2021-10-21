@@ -14,7 +14,7 @@ class Note extends React.Component {
     return(
       <bp3.Card className={styles.note}>
         <div className={styles.title + ' space-btw'}>
-          <h3>How to create basic note</h3>
+          <h3>{this.props.title || 'How to create basic note'}</h3>
           <bp3.Popover 
             placement="bottom-right"
             minimal
@@ -23,8 +23,8 @@ class Note extends React.Component {
                 <bp3.MenuItem icon="edit" text="Edit" />
                 <bp3.MenuItem icon="delete" text="Delete" intent={bp3.Intent.DANGER}/>
                 <bp3.MenuDivider title="resize"/>
-                <bp3.MenuItem icon="zoom-in" text="Increase" />
-                <bp3.MenuItem icon="zoom-out" text="Decrease" />
+                <bp3.MenuItem icon="plus" text="Increase size" />
+                <bp3.MenuItem icon="minus" text="Decrease size" />
               </bp3.Menu>
             }
             target={<bp3.Button icon="more" minimal></bp3.Button>}
@@ -33,15 +33,13 @@ class Note extends React.Component {
         </div>
         <bp3.Divider className={styles.divider}/>
         
-        <div className={styles.desc}><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        <br/><br/><br/><br/><br/><br/><br/><br/>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p></div>
+        <div className={styles.desc}>{this.props.desc}</div>
         <div className={styles.code}>    
           <Editor
             width="auto"
             theme="vs-dark"
             defaultLanguage="javascript"
-            defaultValue="// let's write some broken code 😈"
+            defaultValue={this.props.code || '// let\'s write some broken code 😈 '}
             onChange={(newValue, e) => console.log(newValue, e)}
           />
         </div>
