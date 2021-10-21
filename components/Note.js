@@ -22,7 +22,13 @@ class Note extends React.Component {
               <bp3.Menu>
                 <bp3.MenuItem icon="edit" text="Edit" />
                 <bp3.MenuItem icon="delete" text="Delete" intent={bp3.Intent.DANGER}/>
-                <bp3.MenuDivider title="resize"/>
+                <bp3.MenuDivider title="Language"/>
+                <bp3.MenuItem icon="code" text="select anguage">
+                  <bp3.MenuItem icon="code" text="javascript" />
+                  <bp3.MenuItem icon="code" text="python" />
+                  <bp3.MenuItem icon="code" text="c++" />
+                </bp3.MenuItem>
+                <bp3.MenuDivider title="Resize"/>
                 <bp3.MenuItem icon="plus" text="Increase size" />
                 <bp3.MenuItem icon="minus" text="Decrease size" />
               </bp3.Menu>

@@ -22,7 +22,7 @@ class Lang extends React.Component {
   toggleAddNote = () => {
     this.setState({openAddNote: !this.state.openAddNote})
   }
-  toggleAddNote = () => {
+  toggleAddTopic = () => {
     this.setState({openAddTopic: !this.state.openAddTopic})
   }
 
@@ -78,7 +78,7 @@ class Lang extends React.Component {
               <bp3.Button icon="cross" onClick={this.toggleAddNote} minimal></bp3.Button>
             </div>
             <div className="bp3-dialog-body">
-              <bp3.InputGroup onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb" placeholder="Enter title for note" ></bp3.InputGroup>
+              <bp3.InputGroup onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb" placeholder="Enter title for note"></bp3.InputGroup>
               <bp3.TextArea onChange={(e)=> {this.setState({desc:e.target.value})}} className="w-full mar-tb" placeholder="Enter note here" fill></bp3.TextArea>
               { this.state.warn ? <bp3.Callout intent={bp3.Intent.DANGER}>{this.state.warn}</bp3.Callout> : null }
             </div>
@@ -97,16 +97,15 @@ class Lang extends React.Component {
           <bp3.Dialog isOpen={this.state.openAddTopic}>
             <div className="bp3-dialog-header space-btw">
               <h3>Enter title</h3>
-              <bp3.Button icon="cross" onClick={this.toggleAddNote} minimal></bp3.Button>
+              <bp3.Button icon="cross" onClick={this.toggleAddTopic} minimal></bp3.Button>
             </div>
             <div className="bp3-dialog-body">
-              <bp3.InputGroup onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb" placeholder="Enter title for note" ></bp3.InputGroup>
-              <bp3.TextArea onChange={(e)=> {this.setState({desc:e.target.value})}} className="w-full mar-tb" placeholder="Enter note here" fill></bp3.TextArea>
+              <bp3.InputGroup onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb" placeholder="Enter name of framework" ></bp3.InputGroup>
               { this.state.warn ? <bp3.Callout intent={bp3.Intent.DANGER}>{this.state.warn}</bp3.Callout> : null }
             </div>
             <div className="bp3-dialog-footer">
               <div className="bp3-dialog-footer-actions">
-                <bp3.Button onClick={this.toggleAddNote} icon='cross' >Cancel</bp3.Button>
+                <bp3.Button onClick={this.toggleAddTopic} icon='cross' >Cancel</bp3.Button>
                 <bp3.Button onClick={this.addNote}icon='plus' intent={bp3.Intent.PRIMARY}>Add Note</bp3.Button>
               </div>
             </div>
