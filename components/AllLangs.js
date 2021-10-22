@@ -30,20 +30,15 @@ class AllLangs extends React.Component {
       let i = 1
       this.context.langs.forEach(element => {
         if(i%4 === 1){
-          console.log(element)
-          console.log(element.topics)
           row1.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
         if(i%4 === 2){
-          console.log(element)
           row2.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
         if(i%4 === 3){
-          console.log(element)
           row3.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
         if(i%4 === 0){
-          console.log(element)
           row4.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
         i++

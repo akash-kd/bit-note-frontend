@@ -47,7 +47,7 @@ class Layout extends react.Component {
   }
   
   render() {
-    console.log('render')
+    console.log('render',this.context.user,this.context.langs)
     return (
       <bp3.Callout className={'bp3-' + this.state.theme + ' h-full w-full pad-0'}>
         <Nav

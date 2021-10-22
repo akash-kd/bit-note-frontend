@@ -10,7 +10,6 @@ class Note extends React.Component {
 
 
   render(){
-    console.log(this.props)
     return(
       <bp3.Card className={styles.note}>
         <div className={styles.title + ' space-btw'}>

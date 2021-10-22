@@ -3,6 +3,7 @@ import React from 'react'
 import * as bp3 from '@blueprintjs/core'
 import Note from '../../components/Note'
 import { authCtx } from '../../context/authCtx'
+import axios from 'axios'
 
 
 class Lang extends React.Component {
@@ -19,6 +20,10 @@ class Lang extends React.Component {
     this.getNotes.bind(this)
   }
   static contextType = authCtx
+
+  componentDidMount(){
+    this.setState({id:this.props.router.query.id})
+  }
   toggleAddNote = () => {
     this.setState({openAddNote: !this.state.openAddNote})
   }
@@ -27,9 +32,11 @@ class Lang extends React.Component {
   }
 
   addNote = () => {
-    console.log('add note')
     if (this.state.title){
-      console.log('title:',this.state.title,'desc:',this.state.desc)
+      axios.post('http://localhost:3030/lang/addNotes/'+this.props.router.query.id,{note:{title:this.state.title,desc:this.state.desc},createdBy:this.context.user})
+        .then(res=>{
+          this.setState({openAddNote: false,notes:res.data.notes})
+        })
     }
     else{
       this.setState({warn: 'Title Field cannot be empty'})
@@ -49,11 +56,8 @@ class Lang extends React.Component {
     )
   }
   render() {
-    console.log('auth',this.context.isAuth)
-    console.log('title:',this.state.title)
     // if user exists in context, then render page
     if (this.context.isAuth){
-      console.log('USER logerd in')
       return (
         <div className="w-full mar-0 pad-1 pad-tb">
           { /* top bar containt title, search,add note and add topic */}
@@ -86,7 +90,7 @@ class Lang extends React.Component {
             <div className="bp3-dialog-footer">
               <div className="bp3-dialog-footer-actions">
                 <bp3.Button onClick={this.toggleAddNote} icon='cross' >Cancel</bp3.Button>
-                <bp3.Button onClick={this.addNote}icon='plus' intent={bp3.Intent.PRIMARY}>Add Note</bp3.Button>
+                <bp3.Button onClick={this.addNote} icon='plus' intent={bp3.Intent.PRIMARY}>Add Note</bp3.Button>
               </div>
             </div>
 
