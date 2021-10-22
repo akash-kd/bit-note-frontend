@@ -1,13 +1,16 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
 import {authCtx,auth,AuthProvider} from '../context/authCtx'
+import { HotkeysProvider } from '@blueprintjs/core'
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider >
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AuthProvider>
+    <HotkeysProvider>
+      <AuthProvider >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
+    </HotkeysProvider>
   )
 }
 

@@ -65,6 +65,14 @@ const styleMap = {
     backgroundColor: 'transparent',
   },
 }
+const appHotkeys = [
+  {
+    combo: 'ctrl + b',
+    global: true,
+    label: 'Open',
+    onKeyDown: () => console.info('open'),
+  },
+]
 class Note extends React.Component {
   constructor(props) {
     super(props)
@@ -80,7 +88,7 @@ class Note extends React.Component {
       toolbar: false,
       editorState: EditorState.createEmpty()
     }
-    this.onChange = editorState => this.setState({editorState})
+    this.onChange = this.onChange.bind(this)
     this.toggleColor = this.toggleColor.bind(this)
     this._onBoldClick = this._onBoldClick.bind(this)
     this._onItalicClick = this._onItalicClick.bind(this)
@@ -110,6 +118,7 @@ class Note extends React.Component {
   }
 
 
+
   onSave() {
     console.log(this.state.newTitle)
     console.log(this.state.newDesc)
@@ -118,8 +127,8 @@ class Note extends React.Component {
       editTitle:false,
       edit:false,
       toolbar:false,
-      newTitle:'',
-      newDesc:'',
+      newTitle:this.state.newTitle,
+      newDesc:convertToRaw(this.state.editorState.getCurrentContent()),
       newCode:'',
     })
   }
@@ -134,6 +143,15 @@ class Note extends React.Component {
       newCode:'',
     })
   }
+
+  onChange(editorState) {
+    this.setState({
+      editorState,
+      edit:true,
+    })
+  }
+
+
 
   toggleColor(color) {
     switch (color) {
@@ -215,8 +233,10 @@ class Note extends React.Component {
   render(){
     console.log(convertToRaw(this.state.editorState.getCurrentContent()))
     console.log(this.state.toolbar)
+
     return(
       <bp3.Card className={styles.note}>
+
         <div className={styles.title + ' space-btw'}>
           {
             this.state.editTitle ?
@@ -251,7 +271,7 @@ class Note extends React.Component {
         </div>
         <bp3.Divider className={styles.divider}/>
           
-
+        
         <div className={styles.desc}>
           { 
             this.state.toolbar ?
@@ -302,12 +322,14 @@ class Note extends React.Component {
                 </bp3.ButtonGroup>
               </div> : <></>
           } 
-          <RichEditor 
-            customStyleMap={styleMap}
-            editorState={this.state.editorState} 
-            onChange={this.onChange}
-            placeholder="Write your note here"
-          />
+          <bp3.HotkeysTarget2 hotkeys={appHotkeys}>
+            <RichEditor 
+              customStyleMap={styleMap}
+              editorState={this.state.editorState} 
+              onChange={this.onChange}
+              placeholder="Write your note here"
+            />
+          </bp3.HotkeysTarget2>
         </div>
         <div className={styles.code}>    
           <Editor
@@ -315,7 +337,10 @@ class Note extends React.Component {
             theme="vs-dark"
             defaultLanguage="javascript"
             defaultValue={this.props.code ||  this.state.code || '// let\'s write some broken code 😈 '}
-            onChange={(newValue, e) => console.log(newValue, e)}
+            onChange={(newval) => {
+              this.setState({newcode:newval})
+            }
+            }
           />
         </div>
         <bp3.Collapse isOpen={this.state.edit} className={styles.bottom}>
