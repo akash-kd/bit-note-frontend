@@ -44,14 +44,21 @@ class Lang extends React.Component {
   }
 
   getNotes = () => {
+    let notes = []
+    let elems = []
+    this.context.langs.filter(lang=> lang._id === this.props.router.query.id).map(lang=> notes = lang.notes)
+    notes.forEach(note=>{
+      elems.push(<Note key={note} id={note}/>)
+    })
+    if (this.state.notes){
+      elems = []
+      this.state.notes.forEach(note=>{
+        elems.push(<Note key={note} id={note}/>)
+      })
+    }
     return (
       <>
-        <Note title={'HELO BLAHBLAH'} code={'//COde'} desc={'This is description fo the the following code'}/>
-        <Note />
-
-        <Note />
-        <Note />
-        <Note />
+        {elems}
       </>
     )
   }

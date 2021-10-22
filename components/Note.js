@@ -8,6 +8,12 @@ class Note extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    console.log('Note mounted')
+  }
+  componentDidUpdate() {
+    console.log('Note updated')
+  }
 
   render(){
     return(
