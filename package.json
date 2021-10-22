@@ -12,10 +12,13 @@
     "@blueprintjs/core": "^3.50.2",
     "@monaco-editor/react": "^4.3.1",
     "axios": "^0.21.4",
+    "draft-js": "^0.11.7",
     "loadash": "^1.0.0",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "slate": "^0.66.5",
+    "slate-react": "^0.67.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
