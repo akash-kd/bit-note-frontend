@@ -83,13 +83,13 @@ class Lang extends React.Component {
           {/* All the topic of the language comes here */}
 
           { /* add note modal */}
-          <bp3.Dialog isOpen={this.state.openAddNote}>
+          <bp3.Dialog isOpen={this.state.openAddNote} enforceFocus>
             <div className="bp3-dialog-header space-btw">
               <h3>Enter title</h3>
               <bp3.Button icon="cross" onClick={this.toggleAddNote} minimal></bp3.Button>
             </div>
             <div className="bp3-dialog-body">
-              <bp3.InputGroup onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb" placeholder="Enter title for note"></bp3.InputGroup>
+              <bp3.InputGroup required onChange={(e)=> {this.setState({title:e.target.value,warn: ''})}} className="mar-tb focus" placeholder="Enter title for note" autoComplete></bp3.InputGroup>
               <bp3.TextArea onChange={(e)=> {this.setState({desc:e.target.value})}} className="w-full mar-tb" placeholder="Enter note here" fill></bp3.TextArea>
               { this.state.warn ? <bp3.Callout intent={bp3.Intent.DANGER}>{this.state.warn}</bp3.Callout> : null }
             </div>

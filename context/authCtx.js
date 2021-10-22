@@ -21,7 +21,7 @@ export const AuthProvider = ({children}) =>{
   //     setUser(res)
   //     setAuth(true)
   //   })
-  // }
+  // }w
   // console.log('ctx')
 
   // console.log(user)

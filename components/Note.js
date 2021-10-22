@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '../styles/components/note.module.css'
 import * as bp3 from '@blueprintjs/core'
 import Editor from '@monaco-editor/react'
+import axios from 'axios'
 class Note extends React.Component {
   constructor(props) {
     super(props)
@@ -10,6 +11,7 @@ class Note extends React.Component {
 
   componentDidMount() {
     console.log('Note mounted')
+    axios.post('http://localhost:3030/note/')
   }
   componentDidUpdate() {
     console.log('Note updated')

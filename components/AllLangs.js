@@ -23,7 +23,6 @@ class AllLangs extends React.Component {
       let row2 = []
       let row3 = []
       let row4 = []
-
       // pushing all the languages into their respective rows
       this.context.langs.forEach((element,i) => {
         if(i%4 === 0){

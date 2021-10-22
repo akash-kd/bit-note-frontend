@@ -13,20 +13,20 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-	  const email = localStorage.getItem('email')
-	  if(email){
+    const email = localStorage.getItem('email')
+    if(email){
       Router.push('/user')
-	  }
+    }
   }
 
   render(){
     return (
       <div className={style.main}>
         <bp3.Card interactive elevation={bp3.Elevation.TWO}>
-				Hello World
+          Hello World
         </bp3.Card>
       </div>
-	  )
+    )
   }
 }
 export default Home
