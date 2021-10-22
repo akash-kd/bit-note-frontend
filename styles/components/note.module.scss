@@ -1,16 +1,17 @@
-$inner-pad:5px;
+$inner-pad:0px;
 
 .note{
     display: grid;
     grid-template-areas:    
     "title title"
     "div div"
-    "desc code";
+    "desc code"
+    "bot bot";
     grid-template-rows: 40px auto;
     grid-template-columns: 1fr 1fr;
-    grid-gap: $inner-pad;
-    padding: 10px;
-    margin: 10px;
+    grid-gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .title{
@@ -24,15 +25,28 @@ $inner-pad:5px;
     grid-area: div;
     margin: 0;
 }
+.toolbar{
+    .bp3-collapse-body{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    width: 100%;
+    margin-bottom: 10px;
+
+}
 
 .desc{
     grid-area: desc;
     height: 200px; 
     overflow-y: auto;
     word-wrap: break-word;
-    padding: $inner-pad;
-    padding-left: 15px;
-    padding-right: 15px;
+    // padding: $inner-pad;
+    // padding-left: 15px;
+    // padding-right: 15px;
+}
+.space{
+    height: 10px;
 }
 .code{
     grid-area: code;    
@@ -41,3 +55,76 @@ $inner-pad:5px;
     padding: $inner-pad;
 
 }
+.bottom{
+    grid-area: bot;
+    display: flex;
+    justify-content: end;
+}
+.bottomBtn{
+    margin-left: 10px;
+}
+
+.red{
+    svg{
+        path{
+            fill: crimson;
+        };
+    }
+}
+.orange{
+    svg{
+        path{
+            fill: tomato;
+        };
+    }
+}
+.yellow{
+    svg{
+        path{
+            fill: gold;
+        };
+    }
+}
+.green{
+    svg{
+        path{
+            fill: greenyellow;
+        };
+    }
+}
+.teal{
+    svg{
+        path{
+            fill: turquoise;
+        };
+    }
+}
+.blue{
+    svg{
+        path{
+            fill: dodgerblue;
+        };
+    }
+}
+.voilet{
+    svg{
+        path{
+            fill: blueviolet;
+        };
+    }
+}
+.white{
+    svg{
+        path{
+            fill: white;
+        };
+    }
+}
+.black{
+    svg{
+        path{
+            fill: black;
+        };
+    }
+}
+    

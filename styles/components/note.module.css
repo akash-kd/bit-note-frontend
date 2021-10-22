@@ -1,38 +1,126 @@
 .note {
+  display: -ms-grid;
   display: grid;
-  grid-template-areas: "title title" "div div" "desc code";
-  grid-template-rows: 40px auto;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5px;
-  padding: 10px;
-  margin: 10px;
+      grid-template-areas: "title title" "div div" "desc code" "bot bot";
+  -ms-grid-rows: 40px auto;
+      grid-template-rows: 40px auto;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: title;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  padding: 5px;
+  padding: 0px;
 }
 
 .divider {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
   grid-area: div;
   margin: 0;
 }
 
+.toolbar {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.toolbar .bp3-collapse-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
 .desc {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
   grid-area: desc;
   height: 200px;
   overflow-y: auto;
   word-wrap: break-word;
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+}
+
+.space {
+  height: 10px;
 }
 
 .code {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
   grid-area: code;
   height: auto;
   word-wrap: break-word;
-  padding: 5px;
-}/*# sourceMappingURL=note.module.css.map */
+  padding: 0px;
+}
+
+.bottom {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: bot;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+.bottomBtn {
+  margin-left: 10px;
+}
+
+.red svg path {
+  fill: crimson;
+}
+
+.orange svg path {
+  fill: tomato;
+}
+
+.yellow svg path {
+  fill: gold;
+}
+
+.green svg path {
+  fill: greenyellow;
+}
+
+.teal svg path {
+  fill: turquoise;
+}
+
+.blue svg path {
+  fill: dodgerblue;
+}
+
+.voilet svg path {
+  fill: blueviolet;
+}
+
+.white svg path {
+  fill: white;
+}
+
+.black svg path {
+  fill: black;
+}
+/*# sourceMappingURL=note.module.css.map */

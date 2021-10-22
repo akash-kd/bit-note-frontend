@@ -1,1 +1,9 @@
-{"version":3,"sources":["user.module.scss"],"names":[],"mappings":"AAAA;EACI,0BAAA;EAAA,uBAAA;EAAA,kBAAA;AACJ","file":"user.module.css"}
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,EAAE,CAAA;EACE,KAAK,EAAE,WAAW;CACrB",
+    "sources": [
+        "user.module.scss"
+    ],
+    "names": [],
+    "file": "user.module.css"
+}
