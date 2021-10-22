@@ -70,13 +70,22 @@ class user extends React.Component {
 	}
 
 	elem(){
+	  {/* show all language if email is available else the shows the warning that user is not loggined */}
 	  if(this.state.email){
 	    return(
 	      <>
 	        <div className="flex flex-row w-full space-btw">
-	        <h2 className="mar-0">Laguages</h2>
-	        {/* <div className="w-full"></div> */}
-	        <bp3.Button className="add-btn" intent={bp3.Intent.PRIMARY} icon="plus" onClick={this.toggleOverlay}>Add Language</bp3.Button>
+	          {
+			  /* Top bar:
+						structure: <h1 Languages /> <space> <button add language />
+					Divider
+					body:
+						structure: < Alllanges grid<langs /> />
+				 */
+	          }
+	          <h2 className="mar-0">Laguages</h2>
+	          <bp3.Button className="add-btn" intent={bp3.Intent.PRIMARY} icon="plus" onClick={this.toggleOverlay}>Add Language</bp3.Button>
+	          { /* Overlay for add language open when add button is clicked */}
 	          <bp3.Overlay isOpen={this.state.overlay} onClose={this.toggleOverlay} canOutsideClickClose={true} canEscapeKeyClose={true} enforceFocus usePortal={false}>
 	            <div className='flex center'>
 	              <bp3.Card>
@@ -86,7 +95,7 @@ class user extends React.Component {
 	                <bp3.Collapse isOpen={this.state.showWarn}>
 	                  <bp3.Callout intent={bp3.Intent.DANGER}>{this.state.warn}</bp3.Callout>
 	                </bp3.Collapse>
-					
+						
 	                <bp3.ButtonGroup className="mar-1">
 	                  <bp3.Button onClick={this.toggleOverlay}  text="cancel"></bp3.Button>
 	                  <bp3.Button onClick={this.addLang} text="add" intent={bp3.Intent.PRIMARY} icon='plus'></bp3.Button>
@@ -94,13 +103,14 @@ class user extends React.Component {
 	              </bp3.Card>
 	            </div>
 	          </bp3.Overlay>
-	      </div>	
+			  {/* Overlay over */}
+	        </div>	
 	      <bp3.Divider className="divider"/>
+
 	        <AllLangs user={this.context.user}/>
 		  </>
 	    )
 	  }
-
 	  else{
 	    return(
 	      <bp3.Callout className='mar-tb' title="User not Logged-in" about="HEll" intent={bp3.Intent.WARNING}>Create an account or sign in to add notes</bp3.Callout>

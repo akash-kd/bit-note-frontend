@@ -42,6 +42,8 @@ class Nav extends React.Component {
 	  this.setState({ password: e.target.value })
 	}
 
+
+	// create login request to backend
 	handleLogin = async () => {
 	  console.log(this.state.email)
 	  console.log(this.state.password)
@@ -67,6 +69,7 @@ class Nav extends React.Component {
 	    })
 	}
 
+	// create signup request to backend
 	handleSignup = async () => {
 	  await axios
 	    .post('http://localhost:3030/user/signup', {
@@ -91,6 +94,7 @@ class Nav extends React.Component {
 	    .catch()
 	}
 
+	// logout request to backend
 	handleLogout = () => {
 	  localStorage.removeItem('email')
 	  this.setState({isLoggedIn:false})
@@ -153,6 +157,8 @@ class Nav extends React.Component {
 	      .catch()
 	  }
 	}
+
+	// shows the login overlay
 	Login() {
 	  return (
 	    <bp3.Callout>
@@ -185,6 +191,7 @@ class Nav extends React.Component {
 	  )
 	}
 
+	// shows the signup overlay
 	Signup() {
 	  return (
 	    <bp3.Callout>
@@ -227,6 +234,7 @@ class Nav extends React.Component {
 	  )
 	}
 
+	// shows the setting and logout button
 	Account(){
 
 	  return (
@@ -238,24 +246,25 @@ class Nav extends React.Component {
   
 	  }
 
-	  showWarning = () => {
-	    if (this.state.warn == '') {
-		  return <></>
-	    } else {
-		  return (
-	        <bp3.FormGroup>
-			  <bp3.Callout intent={bp3.Intent.DANGER}>
-	            {this.state.warn}
-			  </bp3.Callout>
-	        </bp3.FormGroup>
-		  )
-	    }
+	// shows the warning if any warning in state
+	showWarning = () => {
+	  if (this.state.warn == '') {
+	    return <></>
+	  } else {
+	    return (
+	      <bp3.FormGroup>
+	        <bp3.Callout intent={bp3.Intent.DANGER}>
+	          {this.state.warn}
+	        </bp3.Callout>
+	      </bp3.FormGroup>
+	    )
 	  }
-	  getElements() {
+	}
+	getElements() {
 	  let userButton = <></>
 	  // if there is no user in context, show login button
 	  if(JSON.stringify(this.context.user) === '{}'){
-		  userButton = <bp3.Button 	          
+	    userButton = <bp3.Button 	          
 	      className={styles.button}
 	      intent={bp3.Intent.PRIMARY}
 	      loading
@@ -264,36 +273,35 @@ class Nav extends React.Component {
 	  }
 	  // shows the name of the user if there is a user in context
 	  else{
-		  userButton = 
-		  <bp3.Popover
-		    content={this.Account()}
-		    target = {		  
-			  <bp3.Button 	          
-		        className={styles.button}
-		        intent={bp3.Intent.PRIMARY}
-			  icon="user"
-			  >
-		        {this.context.user.name}
-			  </bp3.Button>
-		    }
-		  >
-  
-		  </bp3.Popover>
-  
+	    userButton = 
+			<bp3.Popover
+			  content={this.Account()}
+			  target = {		  
+			    <bp3.Button 	          
+			      className={styles.button}
+			      intent={bp3.Intent.PRIMARY}
+			      icon="user"
+			    >
+			      {this.context.user.name}
+			    </bp3.Button>
+			  }>
+
+			</bp3.Popover>
+
 	  }
 	  // theme chaning button + login or user button
 	  if (JSON.stringify(this.context.user) !== '{}') {
 	    return(
 	      <bp3.Navbar.Group align={bp3.Alignment.RIGHT}>
-			  <bp3.Button
+	        <bp3.Button
 	          className={styles.button}
 	          intent={bp3.Intent.PRIMARY}
 	          icon={this.props.icon}
 	          onClick={() => this.props.changeTheme()}
-			  />
-			  {userButton}
+	        />
+	        {userButton}
 	      </bp3.Navbar.Group>
-		  )
+	    )
 	  }
 	  else {
 	    return (
@@ -332,9 +340,11 @@ class Nav extends React.Component {
 	      </bp3.Navbar.Group>
 	    )
 	  }
-	  }
 
-	  render() {
+	  // this elem function ends
+	}
+
+	render() {
 	  let str = 'Bit Note'
 	  return (
 	    <div>

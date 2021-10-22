@@ -9,15 +9,11 @@ class AllLangs extends React.Component {
     this.state = {
     }
     this.state = {
-      count: 0,
       data:{}
     }
   }
   static contextType = authCtx 
-
-
-
-
+  
   render() {
     if (JSON.stringify(this.context.langs) == '[]'){
       return <bp3.Button minimal loading></bp3.Button>
@@ -27,18 +23,19 @@ class AllLangs extends React.Component {
       let row2 = []
       let row3 = []
       let row4 = []
-      let i = 1
-      this.context.langs.forEach(element => {
-        if(i%4 === 1){
+
+      // pushing all the languages into their respective rows
+      this.context.langs.forEach((element,i) => {
+        if(i%4 === 0){
           row1.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
-        if(i%4 === 2){
+        if(i%4 === 1){
           row2.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
-        if(i%4 === 3){
+        if(i%4 === 2){
           row3.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
-        if(i%4 === 0){
+        if(i%4 === 3){
           row4.push(<Lang key={element._id} id={element._id} name={element.name} topics={element.topics}/>)
         }
         i++
