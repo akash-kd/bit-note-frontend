@@ -23,6 +23,10 @@ class Lang extends React.Component {
 
   componentDidMount(){
     this.setState({id:this.props.router.query.id})
+    console.log('[lang] mount')
+  }
+  componentDidUpdate(prevProps, prevState){
+    console.log('[lang] update')
   }
   toggleAddNote = () => {
     this.setState({openAddNote: !this.state.openAddNote})
@@ -35,6 +39,7 @@ class Lang extends React.Component {
     if (this.state.title){
       axios.post('http://localhost:3030/lang/addNotes/'+this.props.router.query.id,{note:{title:this.state.title,desc:this.state.desc},createdBy:this.context.user})
         .then(res=>{
+          console.log('notes',res.data.notes)
           this.setState({openAddNote: false,notes:res.data.notes})
         })
     }

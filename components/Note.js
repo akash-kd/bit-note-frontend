@@ -79,10 +79,12 @@ class Note extends React.Component {
     this.state = {
       title: '',
       desc: '',
+      code:'',
       content: '',
       newTitle:'',
       newDesc:'',
       newCode:'',
+      warn:'',
       edit:false,
       editTitle:false,
       toolbar: false,
@@ -98,39 +100,60 @@ class Note extends React.Component {
     this.onCancle = this.onCancle.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log('Note mounted')
-    axios.post('http://localhost:3030/note/getNote',{id:this.props.id})
+    await axios.post('http://localhost:3030/note/getNote',{id:this.props.id})
       .then(res => {
-        console.log(res.data)
-        this.setState({
-          title: res.data.title,
-          desc: res.data.desc,
-          code: res.data.code,
-        })
+        console.log('DATA FROM SERVER',res.data)
+
+        if (res.data.desc == undefined || res.data.desc.blocks[0].text === '' ) {
+          this.setState({
+            title: res.data.title,
+            editorState: EditorState.createEmpty(),  
+            code: res.data.code,
+          })
+        }
+        else {
+          res.data.desc.entityMap = {}
+          this.setState({
+            title: res.data.title,
+            editorState: EditorState.createWithContent(convertFromRaw(res.data.desc)),
+            code: res.data.code,
+          })
+        }
+
       })
       .catch(err => {
-        console.log(err)
+        console.log(err.message)
+        this.setState({warn: 'Error loading note'})
       })
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     console.log('Note updated')
   }
 
 
 
   onSave() {
-    console.log(this.state.newTitle)
-    console.log(this.state.newDesc)
-    console.log(this.state.newCode)
-    this.setState({
-      editTitle:false,
-      edit:false,
-      toolbar:false,
-      newTitle:this.state.newTitle,
-      newDesc:convertToRaw(this.state.editorState.getCurrentContent()),
-      newCode:'',
-    })
+    console.log('tit:',this.state.newTitle)
+    console.log('desc:',this.state.editorState.getCurrentContent())
+    console.log('code:',this.state.code)
+    let title
+    if (this.state.newTitle) {
+      title = this.state.newTitle
+    } else {
+      title = this.state.title
+    }
+
+    axios.post('http://localhost:3030/note/updateNote',
+      {
+        id:this.props.id,
+        title:title,
+        desc:convertToRaw( this.state.editorState.getCurrentContent() ),
+        code:this.state.code
+      }
+    )
+    this.setState({edit:false,editTitle:false,toolbar:false})
   }
 
   onCancle(){
@@ -231,18 +254,23 @@ class Note extends React.Component {
 
 
   render(){
-    console.log(convertToRaw(this.state.editorState.getCurrentContent()))
-    console.log(this.state.toolbar)
-
+    console.log('render',this.state.title,this.state.editorState,this.state.code)
     return(
       <bp3.Card className={styles.note}>
 
         <div className={styles.title + ' space-btw'}>
           {
             this.state.editTitle ?
-              <bp3.InputGroup placeholder="Edit title"/>
+              <bp3.InputGroup placeholder="Edit title" onChange={ (e)=>this.setState({newTitle:e.target.value}) }/>
               :
-              <h2>{this.props.title || this.state.title || 'How to create basic note'}</h2>
+              <h2>{this.state.title}</h2>
+          }
+
+          {
+            this.state.warn ?
+              <bp3.Icon icon="warning-sign" intent={bp3.Intent.DANGER}/>
+              :
+              <></>
           }
           
 
@@ -255,9 +283,14 @@ class Note extends React.Component {
                 <bp3.MenuItem icon="edit" text="Edit" onClick={()=>{this.setState({toolbar:!this.state.toolbar,edit:true})}} />
                 <bp3.MenuItem icon="delete" text="Delete" intent={bp3.Intent.DANGER}/>
                 <bp3.MenuDivider title="Language"/>
-                <bp3.MenuItem icon="code" text="select anguage">
+                <bp3.MenuItem icon="code" text="language">
                   <bp3.MenuItem icon="code" text="javascript" />
                   <bp3.MenuItem icon="code" text="python" />
+                  <bp3.MenuItem icon="code" text="c++" />
+                </bp3.MenuItem>
+                <bp3.MenuItem icon="code" text="theme">
+                  <bp3.MenuItem icon="code" text="dark" />
+                  <bp3.MenuItem icon="code" text="light" />
                   <bp3.MenuItem icon="code" text="c++" />
                 </bp3.MenuItem>
                 <bp3.MenuDivider title="Resize"/>
@@ -331,14 +364,15 @@ class Note extends React.Component {
             />
           </bp3.HotkeysTarget2>
         </div>
-        <div className={styles.code}>    
+        <div className={styles.code}> 
           <Editor
             width="auto"
             theme="vs-dark"
             defaultLanguage="javascript"
-            defaultValue={this.props.code ||  this.state.code || '// let\'s write some broken code 😈 '}
+            defaultValue={this.state.code}
+            value={this.state.code}
             onChange={(newval) => {
-              this.setState({newcode:newval})
+              this.setState({code:newval,edit:true})
             }
             }
           />
