@@ -12,7 +12,6 @@
     "@blueprintjs/core": "^3.50.2",
     "@monaco-editor/react": "^4.3.1",
     "axios": "^0.21.4",
-    "dotenv": "^10.0.0",
     "draft-js": "^0.11.7",
     "loadash": "^1.0.0",
     "next": "11.1.2",

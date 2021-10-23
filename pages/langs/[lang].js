@@ -24,7 +24,7 @@ class Lang extends React.Component {
   async componentDidMount(){
     this.setState({id:this.props.router.query.id})
     console.log('[lang] mount')
-    await axios.post(process.env.URL_KEY + '/lang/getNotes/'+this.props.router.query.id)
+    await axios.post('http://localhost:3030/lang/getNotes/'+this.props.router.query.id)
       .then(res => {
         this.setState({notes:res.data.notes.reverse()})
       })
@@ -41,7 +41,7 @@ class Lang extends React.Component {
 
   addNote = () => {
     if (this.state.title){
-      axios.post(process.env.URL_KEY + '/lang/addNotes/'+this.props.router.query.id,{note:{title:this.state.title,desc:this.state.desc},createdBy:this.context.user})
+      axios.post('http://localhost:3030/lang/addNotes/'+this.props.router.query.id,{note:{title:this.state.title,desc:this.state.desc},createdBy:this.context.user})
         .then(res=>{
           console.log('notes',res.data.notes)
           this.setState({openAddNote: false,notes:res.data.notes.reverse()})
