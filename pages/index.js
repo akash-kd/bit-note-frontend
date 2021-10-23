@@ -5,8 +5,6 @@ import Image from 'next/image'
 import Nav from '../components/Nav.js'
 import * as bp3 from '@blueprintjs/core'
 import style from '../styles/components/main.module.css'
-
-
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -17,6 +15,7 @@ class Home extends React.Component {
     if(email){
       Router.push('/user')
     }
+    
   }
 
   render(){
