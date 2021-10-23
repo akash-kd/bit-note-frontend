@@ -102,7 +102,7 @@ class Note extends React.Component {
 
   async componentDidMount() {
     console.log('Note mounted')
-    await axios.post('http://localhost:3030/note/getNote',{id:this.props.id})
+    await axios.post(process.env.URL_KEY + '/note/getNote',{id:this.props.id})
       .then(res => {
         console.log('DATA FROM SERVER',res.data)
 
@@ -145,7 +145,7 @@ class Note extends React.Component {
       title = this.state.title
     }
 
-    axios.post('http://localhost:3030/note/updateNote',
+    axios.post(process.env.URL_KEY + '/note/updateNote',
       {
         id:this.props.id,
         title:title,

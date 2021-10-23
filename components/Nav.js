@@ -48,7 +48,7 @@ class Nav extends React.Component {
 	  console.log(this.state.email)
 	  console.log(this.state.password)
 	  await axios
-	    .post('http://localhost:3030/user/signin', {
+	    .post(process.env.URL_KEY + '/user/signin', {
 	      email: this.state.email,
 	      password: this.state.password,
 	    })
@@ -72,7 +72,7 @@ class Nav extends React.Component {
 	// create signup request to backend
 	handleSignup = async () => {
 	  await axios
-	    .post('http://localhost:3030/user/signup', {
+	    .post(process.env.URL_KEY + '/user/signup', {
 	      name: this.state.name,
 	      email: this.state.email,
 	      password: this.state.password,
@@ -108,7 +108,7 @@ class Nav extends React.Component {
 	async loginOnEnter(e){
 	  if(e.key == 'Enter'){
 	    await axios
-	      .post('http://localhost:3030/user/signin', {
+	      .post(process.env.URL_KEY + '/user/signin', {
 	        email: this.state.email,
 	      password: this.state.password,
 	    })
@@ -135,7 +135,7 @@ class Nav extends React.Component {
 	async signupOnEnter(e){
 	  if(e.key == 'Enter'){
 	    await axios
-	      .post('http://localhost:3030/user/signup', {
+	      .post(process.env.URL_KEY + '/user/signup', {
 			  name: this.state.name,
 			  email: this.state.email,
 			  password: this.state.password,
