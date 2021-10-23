@@ -21,9 +21,13 @@ class Lang extends React.Component {
   }
   static contextType = authCtx
 
-  componentDidMount(){
+  async componentDidMount(){
     this.setState({id:this.props.router.query.id})
     console.log('[lang] mount')
+    await axios.post('http://localhost:3030/lang/getNotes/'+this.props.router.query.id)
+      .then(res => {
+        this.setState({notes:res.data.notes.reverse()})
+      })
   }
   componentDidUpdate(prevProps, prevState){
     console.log('[lang] update')
@@ -40,7 +44,7 @@ class Lang extends React.Component {
       axios.post('http://localhost:3030/lang/addNotes/'+this.props.router.query.id,{note:{title:this.state.title,desc:this.state.desc},createdBy:this.context.user})
         .then(res=>{
           console.log('notes',res.data.notes)
-          this.setState({openAddNote: false,notes:res.data.notes})
+          this.setState({openAddNote: false,notes:res.data.notes.reverse()})
         })
     }
     else{
@@ -51,10 +55,12 @@ class Lang extends React.Component {
   getNotes = () => {
     let notes = []
     let elems = []
-    this.context.langs.filter(lang=> lang._id === this.props.router.query.id).map(lang=> notes = lang.notes)
-    notes.forEach(note=>{
-      elems.push(<Note key={note} id={note}/>)
-    })
+    // this.context.langs.filter(lang=> lang._id === this.props.router.query.id).map(lang=> notes = lang.notes)
+    // console.log('[langs] notes',notes)
+    // console.log('[langs] state notes',this.state.notes)
+    // notes.forEach(note=>{
+    //   elems.push(<Note key={note} id={note}/>)
+    // })
     if (this.state.notes){
       elems = []
       this.state.notes.forEach(note=>{
