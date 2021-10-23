@@ -29,6 +29,7 @@ static contextType = authCtx
 componentDidMount(){
   const email = localStorage.getItem('email')
   this.setState({email})
+  
 }
 
 toggleOverlay = () => this.setState({overlay: !this.state.overlay})
@@ -37,7 +38,7 @@ handleName = (e) => this.setState({name: e.target.value})
 
 addLang = async (e) =>{
   if (this.state.name){
-    await axios.post('http://localhost:3030/lang/addLang',{
+    await axios.post(process.env.URL_KEY + '/lang/addLang',{
       name: this.state.name,
       createdBy: this.context.user
     })
