@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
 import { authCtx } from '../context/authCtx'
+import LanderNav from './LanderNav'
 class Nav extends React.Component {
   constructor(props) {
     super(props)
@@ -352,7 +353,7 @@ class Nav extends React.Component {
 	        <title>{str}</title>
 	        {/* <link rel="stylesheet" href="./style/components/navbar.module.css"></link> */}
 	      </Head>
-
+	      {this.context.isLander ? <LanderNav/> :
 	      <bp3.Navbar className={styles.navbar}>
 	        <bp3.Navbar.Group>
 	          <bp3.Navbar.Heading className={styles.title}>
@@ -387,6 +388,7 @@ class Nav extends React.Component {
 
 	        {this.getElements()}
 	      </bp3.Navbar>
+	      }
 	    </div>
 	  )
 	  }
