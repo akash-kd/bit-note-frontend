@@ -34,11 +34,12 @@ h3 {
 
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: rgba(28, 145, 254, 0.5);
+  background-color: rgba(28, 145, 254, 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #1c91fe;
+  background-color: rgba(28, 145, 254, 0.5);
+  border-radius: 10px;
 }
 
 .navbar {
@@ -87,6 +88,10 @@ h3 {
 .mar-tb {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.mar-r {
+  margin-right: 10px;
 }
 
 .container {

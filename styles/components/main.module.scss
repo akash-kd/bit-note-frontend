@@ -1,4 +1,46 @@
 .main{
     display: flex;
     flex-direction: column;
+    background-color: #131415;
+    padding: 10px;
+    align-items: center;
+}
+
+.topSpace{
+    height: 50px;
+}
+
+.mainTitle{
+    width: auto;
+    text-align: center;
+    font-size: 56px;
+    font-weight: 900;
+    word-wrap: break-word;
+    line-height: 1.125;
+    padding-top:28px;
+    padding-bottom: 28px;
+}
+
+.midSpace{
+    height: 32px;
+}
+.button{
+    width:135px;
+    height: 44px;
+    margin: 10px;
+    padding: 12px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 12pt;
+    box-shadow: 0px 8px 5px 0px rgba($color: black, $alpha: 0.3) !important;
+    transition: 0.5s;
+    background:linear-gradient(135deg, rgb(203, 94, 238) 0%, rgb(75, 225, 236) 100%) !important;
+    &:hover{
+        box-shadow: 0px 8px 8px 0px rgba($color: black, $alpha: 0.7) !important;
+    }
+    svg {
+        path{
+            fill: white;
+        }
+    }
 }

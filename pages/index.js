@@ -17,14 +17,19 @@ class Home extends React.Component {
   }
 
   render(){
-    console.log(`[index.js] isLANDER:${this.context.isLander}`)
+    console.log(`[index.js] isLANDER:${this.context.isLander}`) 
     return (
-      <div className={style.main}>
-        <div>HELLL</div>
-        <div>HELLL</div>
-        <div>HELLL</div>
-        <div>HELLL</div>
-        <div>HELLL</div>
+      <div className={style.main +' w-full'}>
+        <div className={style.topSpace}></div>
+        <div className={style.mainTitle}><p>A Note taking application <br/>for Programmers</p></div>
+        <div className={style.midSpace}></div>
+        <div>
+          <bp3.Button className={style.button} rightIcon="arrow-right">Start Now</bp3.Button>
+        </div>
+        {/* <div className={style.midSpace}></div> */}
+        <div>
+        <a href="https://imgur.com/WgXxt4C"><img width="100%" height="100%" src="https://i.imgur.com/WgXxt4C.png" title="source: imgur.com" /></a>
+        </div>
       </div>
     )
   }
