@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) =>{
   const [isAuth, setAuth] = useState(false)
   const [user, setUser] = useState({})
   const [langs, setLangs] = useState([])
-
+  const [isLander, setLander] = useState(false)
   // if (isAuth === false) {
   //   getUser().then(res => {
   //     setUser(res)
@@ -28,7 +28,7 @@ export const AuthProvider = ({children}) =>{
 
 
   return (
-    <authCtx.Provider value={{isAuth, user, setAuth, setUser,langs,setLangs}}>
+    <authCtx.Provider value={{isAuth, user, setAuth, setUser,langs,setLangs,isLander, setLander}}>
       {children}
     </authCtx.Provider>
   )

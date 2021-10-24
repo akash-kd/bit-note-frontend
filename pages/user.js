@@ -30,6 +30,7 @@ componentDidMount(){
   const email = localStorage.getItem('email')
   this.setState({email})
   console.log(process.env.URL_KEY)
+  this.context.setLander(false)
   
 }
 

@@ -1,4 +1,4 @@
 .main {
-  padding: 8px;
-}
-/*# sourceMappingURL=main.module.css.map */
+  display: flex;
+  flex-direction: column;
+}/*# sourceMappingURL=main.module.css.map */

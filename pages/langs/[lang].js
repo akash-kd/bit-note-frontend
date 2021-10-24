@@ -24,6 +24,7 @@ class Lang extends React.Component {
   async componentDidMount(){
     this.setState({id:this.props.router.query.id})
     console.log('[lang] mount')
+    this.context.setLander(false)
     await axios.post(process.env.URL_KEY + '/lang/getNotes/'+this.props.router.query.id)
       .then(res => {
         this.setState({notes:res.data.notes.reverse()})
